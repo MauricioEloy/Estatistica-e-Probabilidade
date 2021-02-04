@@ -1,0 +1,109 @@
+---
+title: "PROBABILIDADES"
+runtime: shiny
+output: html_document
+---
+
+# PROBABILIDADES
+
+Todos nos temos a ideia intuitiva do que é Probabilidade. Ao jogarmos uma moeda, por exemplo, só temos duas possilidades: sair "cara" ou sair "coroa". Se desejarmos que saia "cara", temos então $1$ chance em $2$ possíveis. Vamos entender melhor esses conceitos.
+
+## Simulação para o lançamento de uma moeda
+
+```{r}
+library(shiny)
+
+ui<-fluidPage(
+  sliderInput(inputId = "number",
+              label = "SELECIONE O NÚMERO DE JOGADAS",
+              value=1, min = 1, max=1000),
+  plotOutput("barplot")
+ 
+   )
+
+server<-function(input,output){
+    output$barplot<-renderPlot({
+    bp<-barplot(table(sample(c("cara","coroa"),input$number,TRUE)),col=c("red","black"),axis.lty="solid", ylab = "número de lançamentos",
+    main=paste(input$number, "possíveis resultados no lançamento de uma moeda"))
+      
+  })
+}
+shinyApp(ui=ui,server=server)
+
+
+
+```
+
+
+## Simulação para o lançamento de um dado
+
+```{r}
+#install.packages("shiny")
+library(shiny)
+corDegrade <- colorRampPalette(c("darkblue","lightblue"))
+
+ui<-fluidPage(
+  sliderInput(inputId = "number",
+              label = "SELECIONE O NÚMERO DE LANÇAMENTOS",
+              value=1, min = 1, max=10000),
+  plotOutput("barplot")
+  
+)
+
+server<-function(input,output){
+  output$barplot<-renderPlot({
+    barplot(table(sample(c(1:6),input$number,TRUE)),col=corDegrade(10),axis.lty="solid", ylab = "número de lançamentos",
+            main=paste(input$number, "Possíveis resultados no lançamento de um dado não viciado"))
+  })
+}
+shinyApp(ui=ui,server=server)
+```
+
+
+## Experimento, evento e espaço amostral
+
+Experimento pode ser definido como qualquer processo que produza um de, pelo menos dois, resultados distintos. Jogar uma moeda é um exemplo de um experimento.
+
+Todos os resultados possíveis para um experimento é chamado de Espaço amostral. Dentro de um espaço amostral temos subconjuntos, ou seja, grupos de resultados para aquele experimento. Esses subconjuntos recebem o nome de Evento.
+
+Sendo assim, podemos calcular a probabilidade de ocorrência de um evento, considerando que cada resultado tem a mesma chance de ocorrência, da seguinte forma:
+
+$P(EVENTO)=\frac{Númeroderesultados no evento}{número de resultados no espao amostral}$
+
+## USANDO O R NAS REGRAS DE CONTAGEM
+
+### FATORIAL
+
+```{r}
+factorial(5) #comando para calcular o fatorial de um número
+
+seq_1<-c(0,1,2,3,4,5,6)
+factorial(seq_1) #calcula o fatorial de cada número dentro de um vetor
+
+choose(5,4) #calcula a combinação de n elementos, tomados p a p
+
+trapalhoes<-c("DIDI", "DEDE", "MUSSUM", "ZACARIAS")
+
+combn(trapalhoes,2) #lista as combinações possíveis para 4 elementos, tomados 2 a 2
+
+
+
+```
+
+
+### O PACOTE gtools
+
+Importante pacote para lidar com combinações e permutações
+
+```{r}
+#install.packages("gtools")
+library(gtools)
+
+combinations(4,2, trapalhoes) #calcula as combinações de 4 elementos, tomados 2 a 2
+
+permutations(4,2,trapalhoes) #calcula as permutações de 4 elementos, tomados 2 a 2
+
+
+
+```
+
