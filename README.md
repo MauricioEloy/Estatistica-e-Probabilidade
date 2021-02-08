@@ -1,6 +1,12 @@
 # Material Complementar da Disciplina: Estatística e Probabilidade
-*1º Semestre 2020*
 
+**Material Produzido por:** 
+- Alessandro Firmiano: http://lattes.cnpq.br/0355957149114778
+- Carlos Eduardo Cardoso: https://github.com/carlos-cardoso84
+- João Paulo: http://lattes.cnpq.br/8043024792815551
+- Mauricio Eloy: https://github.com/MauricioEloy
+
+*1º Semestre 2020*
 ***
 * UNIDADES DIDÁTICAS
 ***
